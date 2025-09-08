@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tulip ReMoving</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/svg+xml" href="img/Logo.svg">
+</head>
+
+<body>
+  <!-- Header / Navigation -->
+  <header>
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+	  <img alt="Your Moving Co Logo" class="logo-img" src="img/Logo.svg"></img> 
+  	  Tulip ReMoving
+      </a>
+      <span class="menu-toggle">&#9776;</span>
+      <nav>
+        <ul class=nav-links>
+          <li><a href="vision.html">Our Vision</a></li>
+          <li><a href="How_We_Move.html">How We Move</a></li>
+          <li><a href="Q_and_A.html">Q&A</a></li>
+          <li><a href="Move_Sustainably.html">How to Move Sustainably</a></li>
+        </ul>
+      </nav>
+      <a href="booking.html" class="book-btn">Book Now</a>
+      </div>
+  </header>
+  
+  
+  <section>
+  <div class="container_form">
+    <!-- Progress Bar -->
+    <div class="progress-bar-container">
+      <div class="progress-bar" id="progressBar" aria-hidden="true"></div>
+    </div>
+
+    <!-- Step 1: Date & Availability -->
+    <div class="step active" data-step="1" aria-labelledby="step1-title">
+      <h2 id="step1-title">Step 1: Date & Availability</h2>
+
+      <div class="calendar-header">
+        <button type="button" class="nav" onclick="changeMonth(-1)" aria-label="Previous month">&#8592; Prev</button>
+        <span id="calendarMonth" aria-live="polite"></span>
+        <button type="button" class="nav" onclick="changeMonth(1)" aria-label="Next month">Next &#8594;</button>
+      </div>
+
+      <div id="calendarDays" class="calendar-days">
+        <div>Sun</div><div>Mon</div><div>Tue</div>
+        <div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+      </div>
+
+      <div id="calendar" class="calendar-grid" role="grid" aria-label="Select moving date"></div>
+
+      <div class="legend" aria-hidden="true">
+        <div><span class="legend-box green"></span>Available</div>
+        <div><span class="legend-box yellow"></span>Limited</div>
+        <div><span class="legend-box red"></span>Unavailable</div>
+      </div>
+
+      <input type="hidden" id="moveDate" required />
+
+      <div class="buttons">
+	    <button type="button" disabled onclick="prevStep()">Back</button>
+        <button type="button" class="primary" id="step1Next" disabled onclick="nextStep()">Next</button>
+      </div>
+    </div>
+
+    <!-- Step 2: Addresses & Access -->
+    <div class="step" data-step="2" aria-labelledby="step2-title">
+      <h2 id="step2-title">Step 2: Addresses & Access</h2>
+
+      <h3>Origin</h3>
+      <label for="pickupPostcode">Postcode</label>
+      <input type="text" id="pickupPostcode" placeholder="e.g., SW1A 1AA" required/>
+
+      <label for="pickupType">Property Type</label>
+      <select id="pickupType" onchange="toggleFlatFields('pickup')">
+        <option value="house">House</option>
+        <option value="flat">Flat</option>
+      </select>
+
+      <div id="pickupFlatFields" style="display:none;">
+        <label for="pickupFloor">Floor</label>
+        <input type="number" id="pickupFloor" min="0" placeholder="0 for ground floor"/>
+        <label class="inline-label" for="pickupElevator">
+          <input type="checkbox" id="pickupElevator"/> Elevator available
+        </label>
+      </div>
+
+      <label class="inline-label" for="pickupParking">
+        <input type="checkbox" id="pickupParking"/> Parking available
+      </label>
+
+      <h3>Destination</h3>
+      <label for="dropoffPostcode">Postcode</label>
+      <input type="text" id="dropoffPostcode" placeholder="e.g., SW1A 2AA" required/>
+
+      <label for="dropoffType">Property Type</label>
+      <select id="dropoffType" onchange="toggleFlatFields('dropoff')">
+        <option value="house">House</option>
+        <option value="flat">Flat</option>
+      </select>
+
+      <div id="dropoffFlatFields" style="display:none;">
+        <label for="dropoffFloor">Floor</label>
+        <input type="number" id="dropoffFloor" min="0" placeholder="0 for ground floor"/>
+        <label class="inline-label" for="dropoffElevator">
+          <input type="checkbox" id="dropoffElevator"/> Elevator available
+        </label>
+      </div>
+
+      <label class="inline-label" for="dropoffParking">
+        <input type="checkbox" id="dropoffParking"/> Parking available
+      </label>
+
+      <div class="buttons">
+        <button type="button" onclick="prevStep()">Back</button>
+        <button class="primary" data-step="2" disabled onclick="nextStep()">Next</button>
+      </div>
+    </div>
+
+    <!-- Step 3: House Details -->
+    <div class="step" data-step="3" aria-labelledby="step3-title">
+      <h2 id="step3-title">Step 3: House Details</h2>
+
+      <label for="bedrooms">Number of Bedrooms</label>
+      <select id="bedrooms">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5+</option>
+      </select>
+
+      <label for="houseSize">House Size</label>
+      <div class="slider-container">
+        <input type="range" min="100" max="1000" value="200" id="houseSize" oninput="updateSizeDisplay()"/>
+        <span><span id="sizeSqFt">200</span> ft² / <span id="sizeSqM">18.6</span> m²</span>
+      </div>
+
+      <fieldset class="group">
+        <legend>Special Items</legend>
+        <label class="inline-label" for="itemPiano">
+          <input type="checkbox" id="itemPiano" value="piano"/> Piano
+        </label>
+        <label class="inline-label" for="itemPool">
+          <input type="checkbox" id="itemPool" value="poolTable"/> Pool Table
+        </label>
+        <label class="inline-label" for="itemArt">
+          <input type="checkbox" id="itemArt" value="art"/> Artwork
+        </label>
+      </fieldset>
+
+      <div class="buttons">
+        <button type="button" onclick="prevStep()">Back</button>
+        <button type="button" class="primary" onclick="nextStep()">Next</button>
+      </div>
+    </div>
+
+    <!-- Step 4: Additional Requests -->
+    <div class="step" data-step="4" aria-labelledby="step4-title">
+      <h2 id="step4-title">Step 4: Additional Requests</h2>
+
+      <label class="inline-label" for="multipleLocations">
+        <input type="checkbox" id="multipleLocations"/> Move from/to multiple locations
+      </label>
+
+      <label for="notes">Any other requests?</label>
+      <textarea id="notes" rows="4" placeholder="Tell us about any specific needs..."></textarea>
+
+      <div class="buttons">
+        <button type="button" onclick="prevStep()">Back</button>
+        <button type="button" class="primary" onclick="nextStep()">Next</button>
+      </div>
+    </div>
+
+    <!-- Step 5: Review & Book -->
+    <div class="step" data-step="5" aria-labelledby="step5-title">
+      <h2 id="step5-title">Step 5: Review & Book</h2>
+      <p>Distance between postcodes: <span id="postcodeDistance">Calculating...</span></p>
+      <p>Final Price: <span id="finalPriceDisplay">£0.00</span></p>
+      <p id="priceReason"></p>
+	  <p id="response"></p>
+      <div class="buttons">
+        <button type="button" onclick="prevStep()">Back</button>
+        <button type="button" class="primary" name="book-now" id="book-now")">Book Now</button>
+      </div>
+    </div>
+	
+	</div>
+  <!-- Your aerial-distance script (unchanged) -->
+  
+  <script src="script.js"></script>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-container">
+      <div class="contact-info">
+        <p>MoveSmart Ltd.</p>
+        <p>Email: info@movesmart.co.uk | Phone: 01234 567890</p>
+        <p>Address: 123 Moving Lane, London, UK</p>
+      </div>
+      <div class="legal">
+        <p>&copy; 2025 MoveSmart Ltd. All rights reserved.</p>
+        <a href="#">Privacy Policy</a> | <a href="#">Terms & Conditions</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  // Handle booking submission
+  document.getElementById('book-now').addEventListener('click', async function (e) {
+    e.preventDefault();
+
+  const button = e.target;
+  button.disabled = true; // prevent duplicate clicks
+  button.textContent = "Processing...";
+
+    // Collect booking details
+    const bookingData = {
+      moveDate: document.getElementById('moveDate').value,
+      pickupPostcode: document.getElementById('pickupPostcode').value,
+      pickupType: document.getElementById('pickupType').value,
+      pickupFloor: document.getElementById('pickupFloor')?.value || '',
+      pickupElevator: document.getElementById('pickupElevator')?.checked || false,
+      pickupParking: document.getElementById('pickupParking')?.checked || false,
+      dropoffPostcode: document.getElementById('dropoffPostcode').value,
+      dropoffType: document.getElementById('dropoffType').value,
+      dropoffFloor: document.getElementById('dropoffFloor')?.value || '',
+      dropoffElevator: document.getElementById('dropoffElevator')?.checked || false,
+      dropoffParking: document.getElementById('dropoffParking')?.checked || false,
+      bedrooms: document.getElementById('bedrooms').value,
+      houseSize: document.getElementById('houseSize').value,
+      itemPiano: document.getElementById('itemPiano')?.checked || false,
+      itemPool: document.getElementById('itemPool')?.checked || false,
+      itemArt: document.getElementById('itemArt')?.checked || false,
+      multipleLocations: document.getElementById('multipleLocations')?.checked || false,
+      notes: document.getElementById('notes').value,
+      finalPrice: document.getElementById('finalPriceDisplay').textContent
+    };
+
+    try {
+      const res = await fetch('/submit-booking', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(bookingData)
+      });
+
+      const data = await res.json();
+      window.location.href = `payment.html?orderId=${data.message.match(/Order ID: (\d+)/)[1]}`;
+      document.getElementById('response').textContent = data.message;
+    } catch (err) {
+      console.error(err);
+      button.disabled = false; // allow retry
+      document.getElementById('response').textContent = 'Error submitting booking.';
+    }
+  });
+  </script>
+
+
+
+</body>
+</html>

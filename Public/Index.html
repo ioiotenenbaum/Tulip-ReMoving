@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tulip ReMoving</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/svg+xml" href="img/Logo.svg">
+</head>
+<body>
+  <!-- Header / Navigation -->
+  <header>
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+		<img alt="Tulip ReMoving" class="logo-img" src="img/Logo.svg"></img> 
+  	  	Tulip ReMoving
+      </a>
+      <span class="menu-toggle">&#9776;</span>
+      <nav>
+        <ul class=nav-links>
+          <li><a href="vision.html">Our Vision</a></li>
+          <li><a href="How_We_Move.html">How We Move</a></li>
+          <li><a href="Q_and_A.html">Q&A</a></li>
+          <li><a href="Move_Sustainably.html">How to Move Sustainably</a></li>
+        </ul>
+      </nav>
+      <a href="booking.html" class="book-btn">Book Now</a>
+    </div>
+  </header>
+
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Caring for your things, caring for our planet</h1>
+      <p>Book your zero stress, zero waste moving experience in minutes</p>
+      <a href="booking.html" class="cta-btn">Book Now</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-container">
+      <div class="contact-info">
+        <p>MoveSmart Ltd.</p>
+        <p>Email: info@movesmart.co.uk | Phone: 01234 567890</p>
+        <p>Address: 123 Moving Lane, London, UK</p>
+      </div>
+      <div class="legal">
+        <p>&copy; 2025 MoveSmart Ltd. All rights reserved.</p>
+        <a href="#">Privacy Policy</a> | <a href="#">Terms & Conditions</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const toggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('.nav-links');
+    toggle.addEventListener('click', () => {
+      nav.classList.toggle('active');
+    });
+  </script>
+</body>
+</html>

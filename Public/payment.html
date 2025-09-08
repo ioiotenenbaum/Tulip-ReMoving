@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Payment</title>
+</head>
+<body>
+  <h1>Payment Page</h1>
+  <form id="payment-form">
+    <label for="card">Credit Card Number:</label>
+    <input type="text" id="card" required>
+    <button type="submit">Submit Payment</button>
+  </form>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const orderId = urlParams.get("orderId");
+
+    document.getElementById("payment-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      // (we're not storing or passing the card, just redirecting)
+      window.location.href = `index.html?orderId=${orderId}`;
+    });
+  </script>
+</body>
+</html>
