@@ -8,7 +8,7 @@ const PORT = 3000;
 
 app.use(express.json());
 app.use(bodyParser.json());
-app.use(express.static("public"));
+app.use(express.static("docs"));
 
 const ordersFile = path.join(__dirname, "orders.csv");
 
